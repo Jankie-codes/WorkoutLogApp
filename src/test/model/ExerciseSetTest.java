@@ -63,4 +63,5 @@ public class ExerciseSetTest {
         assertEquals(0.9311275959, set1.theoreticalOneRepMaxInPercentBodyWeight(bodyWeight2), 0.0000001);
         assertEquals(0.9311275959, set1.theoreticalOneRepMaxInPercentBodyWeight(bodyWeight2), 0.0000001);
     }
+
 }

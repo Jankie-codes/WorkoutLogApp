@@ -96,4 +96,26 @@ public class User {
     public void setBodyWeight(int bodyWeight) {
         this.bodyWeight = bodyWeight;
     }
+
+    //REQUIRES: multiple workouts on the same date do not exist in this.workouts.
+    //EFFECTS: if a workout with the given date exists in this.workouts, then return that workout.
+    // Otherwise, return null
+    public Workout getWorkoutOnDate(LocalDate date) {
+        for (Workout workout : this.workouts) {
+            if (workout.getDate().compareTo(date) == 0) {
+                return workout;
+            }
+        }
+        return null;
+    }
+
+    //EFFECTS: returns true if a workout with the given date exists in this.workouts. Otherwise, return false
+    public Boolean workoutExistsOnDate(LocalDate date) {
+        for (Workout workout : this.workouts) {
+            if (workout.getDate().compareTo(date) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

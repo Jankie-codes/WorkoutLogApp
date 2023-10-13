@@ -34,7 +34,7 @@ longer have to rely on Apple Notes to do so.
 
 - As a user, I want to be able to log/add an exercise set and specify the type of movement, total weight, 
 total repetitions, and date.
-- As a user, I want to be able to view a list of exercises and sets done on any particular workout day.
+- As a user, I want to be able to view a full workout history.
 - As a user, I want to be able to view my one-rep maxes for each type of lift.
 - As a user, I want to be able to see whether I am strong for my body weight at any particular lift.
-- As a user, I want to be able to see a graph of my one-rep max progression over time for any particular lift.
+- As a user, I want to be able to see my PRs over time for any particular lift.

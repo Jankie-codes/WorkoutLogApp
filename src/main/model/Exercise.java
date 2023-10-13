@@ -25,6 +25,20 @@ public class Exercise {
         return ((((double) this.oneRepMax) / bodyWeight) >= this.minPercentBodyWeightForStrong);
     }
 
+    //REQUIRES: bodyWeight > 0
+    //EFFECTS: returns this exercise's one rep max as a percentage of the given body weight
+    public double oneRepMaxInPercentBodyWeight(int bodyWeight) {
+        return (this.oneRepMax / bodyWeight);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: if the given ExerciseSet has a greater theoretical one rep max than the current one rep max,
+    // then update this.oneRepMax to the given ExerciseSet's theoretical max
+    public void setNewPRIfNecessary(ExerciseSet set) {
+        if (set.theoreticalOneRepMax() > this.oneRepMax) {
+            this.oneRepMax = set.theoreticalOneRepMax();
+        }
+    }
 
     public String getName() {
         return this.name;
@@ -49,6 +63,8 @@ public class Exercise {
     public void setOneRepMax(double oneRepMax) {
         this.oneRepMax = oneRepMax;
     }
+
+
 
 
 }

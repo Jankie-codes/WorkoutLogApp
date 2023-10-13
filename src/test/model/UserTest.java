@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 public class UserTest {
-    User adrian;
+    User testUser;
     Exercise benchPress;
     Exercise benchPressDuplicateName;
     Exercise deadLift;
@@ -28,7 +28,7 @@ public class UserTest {
 
     @BeforeEach
     public void runBefore() {
-        adrian = new User();
+        testUser = new User();
         benchPress = new Exercise("Bench Press", 1.0);
         benchPressDuplicateName = new Exercise("Bench Press", 1.25);
         deadLift = new Exercise("Dead Lift", 2.0);
@@ -50,82 +50,82 @@ public class UserTest {
 
     @Test
     public void testConstructor() {
-        assertEquals(0, adrian.getWorkouts().size());
-        assertEquals(0, adrian.getExercises().size());
-        assertEquals(0, adrian.getBodyWeight());
+        assertEquals(0, testUser.getWorkouts().size());
+        assertEquals(0, testUser.getExercises().size());
+        assertEquals(0, testUser.getBodyWeight());
     }
 
     @Test
     public void testAddExercise() {
-        boolean exerciseAdded1 = adrian.addExercise(benchPress);
-        assertEquals(1, adrian.getExercises().size());
-        assertEquals(benchPress, adrian.getExercises().get(0));
+        boolean exerciseAdded1 = testUser.addExercise(benchPress);
+        assertEquals(1, testUser.getExercises().size());
+        assertEquals(benchPress, testUser.getExercises().get(0));
         assertTrue(exerciseAdded1);
     }
 
     @Test
     public void testAddExerciseMultipleTimes() {
-        boolean exerciseAdded1 = adrian.addExercise(benchPress);
-        boolean exerciseAdded2 = adrian.addExercise(deadLift);
-        assertEquals(2, adrian.getExercises().size());
-        assertEquals(benchPress, adrian.getExercises().get(0));
-        assertEquals(deadLift, adrian.getExercises().get(1));
+        boolean exerciseAdded1 = testUser.addExercise(benchPress);
+        boolean exerciseAdded2 = testUser.addExercise(deadLift);
+        assertEquals(2, testUser.getExercises().size());
+        assertEquals(benchPress, testUser.getExercises().get(0));
+        assertEquals(deadLift, testUser.getExercises().get(1));
         assertTrue(exerciseAdded1);
         assertTrue(exerciseAdded2);
     }
 
     @Test
     public void testAddExerciseMultipleTimesSameNameTwice() {
-        boolean exerciseAdded1 = adrian.addExercise(benchPress);
-        boolean exerciseAdded2 = adrian.addExercise(benchPressDuplicateName);
-        assertEquals(1, adrian.getExercises().size());
-        assertEquals(benchPress, adrian.getExercises().get(0));
+        boolean exerciseAdded1 = testUser.addExercise(benchPress);
+        boolean exerciseAdded2 = testUser.addExercise(benchPressDuplicateName);
+        assertEquals(1, testUser.getExercises().size());
+        assertEquals(benchPress, testUser.getExercises().get(0));
         assertTrue(exerciseAdded1);
         assertFalse(exerciseAdded2);
     }
 
     @Test
     public void testAddWorkout() {
-        adrian.addWorkout(testWorkout1);
-        assertEquals(1, adrian.getWorkouts().size());
-        assertEquals(testWorkout1, adrian.getWorkouts().get(0));
+        testUser.addWorkout(testWorkout1);
+        assertEquals(1, testUser.getWorkouts().size());
+        assertEquals(testWorkout1, testUser.getWorkouts().get(0));
     }
 
     @Test
     public void testAddWorkoutMultipleTimesSameDate() {
-        adrian.addWorkout(testWorkout1);
-        adrian.addWorkout(testWorkout2);
-        adrian.addWorkout(testWorkout3);
-        assertEquals(3, adrian.getWorkouts().size());
-        assertEquals(testWorkout1, adrian.getWorkouts().get(0));
-        assertEquals(testWorkout2, adrian.getWorkouts().get(1));
-        assertEquals(testWorkout3, adrian.getWorkouts().get(2));
+        testUser.addWorkout(testWorkout1);
+        testUser.addWorkout(testWorkout2);
+        testUser.addWorkout(testWorkout3);
+        assertEquals(3, testUser.getWorkouts().size());
+        assertEquals(testWorkout1, testUser.getWorkouts().get(0));
+        assertEquals(testWorkout2, testUser.getWorkouts().get(1));
+        assertEquals(testWorkout3, testUser.getWorkouts().get(2));
     }
 
     @Test
     public void testAddWorkoutThreeTimesDifferentDates() {
-        adrian.addWorkout(testWorkout1);
-        adrian.addWorkout(testWorkout4);
-        adrian.addWorkout(testWorkout5);
+        testUser.addWorkout(testWorkout1);
+        testUser.addWorkout(testWorkout4);
+        testUser.addWorkout(testWorkout5);
 
-        assertEquals(3, adrian.getWorkouts().size());
-        assertEquals(testWorkout5, adrian.getWorkouts().get(0));
-        assertEquals(testWorkout1, adrian.getWorkouts().get(1));
-        assertEquals(testWorkout4, adrian.getWorkouts().get(2));
+        assertEquals(3, testUser.getWorkouts().size());
+        assertEquals(testWorkout5, testUser.getWorkouts().get(0));
+        assertEquals(testWorkout1, testUser.getWorkouts().get(1));
+        assertEquals(testWorkout4, testUser.getWorkouts().get(2));
     }
 
     @Test
     public void testListPRsNoSetsAdded() {
-        HashMap<LocalDate, ExerciseSet> personalRecords = adrian.listPRs(benchPress);
+        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(0, personalRecords.size());
     }
 
     @Test
     public void testListPRsOneSet() {
         testWorkout1.addSet(set1);
-        adrian.addWorkout(testWorkout1);
+        testUser.addWorkout(testWorkout1);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = adrian.listPRs(benchPress);
+        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(1, personalRecords.size());
         assertEquals(set1, personalRecords.get(date1));
     }
@@ -136,9 +136,9 @@ public class UserTest {
         testWorkout1.addSet(set2);
         testWorkout1.addSet(set1);
 
-        adrian.addWorkout(testWorkout1);
+        testUser.addWorkout(testWorkout1);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = adrian.listPRs(benchPress);
+        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(1, personalRecords.size());
         assertEquals(set2, personalRecords.get(date1));
     }
@@ -148,10 +148,10 @@ public class UserTest {
         testWorkout1.addSet(set1);
         testWorkout4.addSet(set2);
 
-        adrian.addWorkout(testWorkout1);
-        adrian.addWorkout(testWorkout4);
+        testUser.addWorkout(testWorkout1);
+        testUser.addWorkout(testWorkout4);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = adrian.listPRs(benchPress);
+        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(2, personalRecords.size());
         assertEquals(set1, personalRecords.get(date1));
         assertEquals(set2, personalRecords.get(date2));
@@ -162,10 +162,10 @@ public class UserTest {
         testWorkout1.addSet(set2);
         testWorkout4.addSet(set1);
 
-        adrian.addWorkout(testWorkout1);
-        adrian.addWorkout(testWorkout4);
+        testUser.addWorkout(testWorkout1);
+        testUser.addWorkout(testWorkout4);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = adrian.listPRs(benchPress);
+        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(1, personalRecords.size());
         assertEquals(set2, personalRecords.get(date1));
     }
@@ -175,10 +175,10 @@ public class UserTest {
         testWorkout1.addSet(set1);
         testWorkout4.addSet(set3);
 
-        adrian.addWorkout(testWorkout1);
-        adrian.addWorkout(testWorkout4);
+        testUser.addWorkout(testWorkout1);
+        testUser.addWorkout(testWorkout4);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = adrian.listPRs(benchPress);
+        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(1, personalRecords.size());
         assertEquals(set1, personalRecords.get(date1));
     }
@@ -188,10 +188,10 @@ public class UserTest {
         testWorkout1.addSet(set4);
         testWorkout4.addSet(set1);
 
-        adrian.addWorkout(testWorkout1);
-        adrian.addWorkout(testWorkout4);
+        testUser.addWorkout(testWorkout1);
+        testUser.addWorkout(testWorkout4);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = adrian.listPRs(benchPress);
+        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(1, personalRecords.size());
         assertEquals(set4, personalRecords.get(date1));
     }
@@ -203,5 +203,26 @@ public class UserTest {
         assertEquals(140, User.roundToBarbellWeight(140.0));
         assertEquals(140, User.roundToBarbellWeight(141.1));
         assertEquals(0, User.roundToBarbellWeight(0.0));
+    }
+
+    @Test
+    public void testGetWorkoutOnDate() {
+        assertNull(testUser.getWorkoutOnDate(date1));
+        testUser.addWorkout(testWorkout1);
+        testUser.addWorkout(testWorkout4);
+        assertEquals(testWorkout1, testUser.getWorkoutOnDate(date1));
+        assertEquals(testWorkout4, testUser.getWorkoutOnDate(date2));
+    }
+
+    @Test
+    public void testWorkoutExistsOnDate() {
+        testUser.addWorkout(testWorkout1);
+        testUser.addWorkout(testWorkout4);
+
+        assertTrue(testUser.workoutExistsOnDate(date1));
+        assertTrue(testUser.workoutExistsOnDate(date2));
+        assertFalse(testUser.workoutExistsOnDate(date3));
+        assertFalse(testUser.workoutExistsOnDate(LocalDate.of(2023,01,01)));
+        assertFalse(testUser.workoutExistsOnDate(LocalDate.of(2022,04,20)));
     }
 }
