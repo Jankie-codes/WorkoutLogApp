@@ -15,7 +15,7 @@ public class ExerciseSet {
     }
 
     //EFFECTS: returns the theoretical one rep max for this set using the Matt Brzycki equation:
-    // (weight / ( 1.0278 – 0.0278 × reps ))
+    // (weight / ( 1.0278 - 0.0278 * reps ))
     public double theoreticalOneRepMax() {
         return (((double) this.weight) / (1.0278 - 0.0278 * this.reps));
     }
