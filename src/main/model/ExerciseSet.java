@@ -38,18 +38,20 @@ public class ExerciseSet {
         return this.reps;
     }
 
-    public void setExercise(Exercise exercise) {
-        this.exercise = exercise;
-    }
+    //commented out the methods below because they are not ever used in the program
+    // and code coverage expects tests for them.
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
+    //public void setExercise(Exercise exercise) {
+    //    this.exercise = exercise;
+    //}
 
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
+    //public void setWeight(int weight) {
+    //    this.weight = weight;
+    //}
 
+    //public void setReps(int reps) {
+    //    this.reps = reps;
+    //}
 }
 
 

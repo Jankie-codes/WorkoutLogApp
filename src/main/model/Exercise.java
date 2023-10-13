@@ -52,19 +52,19 @@ public class Exercise {
         return this.oneRepMax;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setMinPercentBodyWeightForStrong(double minPercentBodyWeightForStrong) {
-        this.minPercentBodyWeightForStrong = minPercentBodyWeightForStrong;
-    }
-
     public void setOneRepMax(double oneRepMax) {
         this.oneRepMax = oneRepMax;
     }
 
+    //commented out the methods below because they are not ever used in the program
+    // and code coverage expects tests for them.
 
+    //public void setName(String name) {
+    //    this.name = name;
+    //}
 
+    //public void setMinPercentBodyWeightForStrong(double minPercentBodyWeightForStrong) {
+    //    this.minPercentBodyWeightForStrong = minPercentBodyWeightForStrong;
+    //}
 
 }

@@ -225,4 +225,11 @@ public class UserTest {
         assertFalse(testUser.workoutExistsOnDate(LocalDate.of(2023,01,01)));
         assertFalse(testUser.workoutExistsOnDate(LocalDate.of(2022,04,20)));
     }
+
+    @Test
+    public void testSetBodyWeight() {
+        assertEquals(0, testUser.getBodyWeight());
+        testUser.setBodyWeight(135);
+        assertEquals(135, testUser.getBodyWeight());
+    }
 }
