@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 //represents an exercise set done during a workout with an exercise, total weight lifted, and total reps done.
-public class ExerciseSet {
+public class ExerciseSet implements Writable {
     Exercise exercise;
     int weight;
     int reps;
@@ -52,6 +55,18 @@ public class ExerciseSet {
     //public void setReps(int reps) {
     //    this.reps = reps;
     //}
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", exercise.getName());
+        json.put("minPercentBodyWeightForStrong", exercise.getMinPercentBodyWeightForStrong());
+        json.put("oneRepMax", exercise.getOneRepMax());
+
+        json.put("weight", weight);
+        json.put("reps", reps);
+        return json;
+    }
 }
 
 

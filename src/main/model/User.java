@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.LocalDate;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 //represents a weightlifter (i.e. the user), with a body weight, list of exercises done, and list of workouts
 // completed in his/her life from least to most recent.
-public class User {
+public class User implements Writable {
     ArrayList<Workout> workouts;
     ArrayList<Exercise> exercises;
     int bodyWeight;
@@ -117,5 +121,49 @@ public class User {
             }
         }
         return false;
+    }
+
+    //!!! UNTESTED
+    //returns null if not found.
+    public Exercise getExercise(String exerciseName) {
+        for (Exercise exercise : this.exercises) {
+            if (exercise.getName().equals(exerciseName)) {
+                return exercise;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("workouts", workoutsToJson());
+        json.put("exercises", exercisesToJson());
+        json.put("bodyWeight", bodyWeight);
+        return json;
+    }
+
+    //!!!
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray workoutsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Workout w : workouts) {
+            jsonArray.put(w.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    //!!!
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray exercisesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Exercise e : exercises) {
+            jsonArray.put(e.toJson());
+        }
+
+        return jsonArray;
     }
 }

@@ -3,9 +3,13 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 //represents a workout done on a particular date, and with a list of sets completed on that day
 // from least to most recent
-public class Workout {
+public class Workout implements Writable {
     private LocalDate date;
     private ArrayList<ExerciseSet> sets;
 
@@ -30,6 +34,23 @@ public class Workout {
         return this.sets;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("date", date.toString());
+        json.put("sets", setsToJson());
+        return json;
+    }
+
+    private JSONArray setsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (ExerciseSet s : sets) {
+            jsonArray.put(s.toJson());
+        }
+
+        return jsonArray;
+    }
 }
 
 

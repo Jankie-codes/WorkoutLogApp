@@ -2,14 +2,23 @@ package ui;
 
 import model.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
 //Workout log application
 public class WorkoutLogApp {
+    private static final String JSON_STORE = "./data/user.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
     static final String UNITS = "lbs";
 
     Scanner input;
@@ -33,7 +42,9 @@ public class WorkoutLogApp {
                     + "\t[P] -> view current PRs for each exercise\n"
                     + "\t[H] -> view PR history for a given exercise\n"
                     + "\t[V] -> view full workout history\n"
-                    + "\t[R] -> view relative strength for each exercise\n",
+                    + "\t[R] -> view relative strength for each exercise\n"
+                    + "\t[S] -> save workout log to file\n"
+                    + "\t[L] -> load workout log from file",
 
             "Choose an exercise:\n"
                     + "\t[B] -> Bench Press\n"
@@ -79,6 +90,9 @@ public class WorkoutLogApp {
         user.addExercise(squat);
         decimalFormat = new DecimalFormat("#.###");
         input = new Scanner(System.in);
+
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     //MODIFIES: this
@@ -148,6 +162,7 @@ public class WorkoutLogApp {
     //MODIFIES: this
     //EFFECTS: processes user command when at main menu (choosing an application feature)
     //modifies menuState depending on user's input
+    @SuppressWarnings("methodlength")
     public void processCommand1(String command) {
         switch (command) {
             case "a":
@@ -168,6 +183,12 @@ public class WorkoutLogApp {
                 listRelativeStrength();
                 menuState = 1;
                 break;
+            case "s":
+                saveUser();
+                break;
+            case "l":
+                loadUser();
+                break;
             default:
                 System.out.println("Error: pressed wrong key");
                 break;
@@ -180,15 +201,15 @@ public class WorkoutLogApp {
     public void processCommand2(String command) {
         switch (command) {
             case "b":
-                exerciseChosen = benchPress;
+                exerciseChosen = user.getExercise("Bench Press");
                 menuState = 7;
                 break;
             case "s":
-                exerciseChosen = squat;
+                exerciseChosen = user.getExercise("Squat");
                 menuState = 7;
                 break;
             case "d":
-                exerciseChosen = deadLift;
+                exerciseChosen = user.getExercise("Dead Lift");
                 menuState = 7;
                 break;
             default:
@@ -263,17 +284,17 @@ public class WorkoutLogApp {
     public void processCommand4(String command) {
         switch (command) {
             case "b":
-                exerciseChosen = benchPress;
+                exerciseChosen = user.getExercise("Bench Press"); //CHANGE THIS TOO!
                 printPRHistory(exerciseChosen);
                 menuState = 1;
                 break;
             case "s":
-                exerciseChosen = squat;
+                exerciseChosen = user.getExercise("Squat");
                 printPRHistory(exerciseChosen);
                 menuState = 1;
                 break;
             case "d":
-                exerciseChosen = deadLift;
+                exerciseChosen = user.getExercise("Dead Lift");
                 printPRHistory(exerciseChosen);
                 menuState = 1;
                 break;
@@ -325,5 +346,28 @@ public class WorkoutLogApp {
             }
         }
         System.out.println("\n");
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveUser() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(user);
+            jsonWriter.close();
+            System.out.println("Saved most recent workout log data to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadUser() {
+        try {
+            user = jsonReader.read();
+            System.out.println("Loaded pre-existing workout log data from" + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

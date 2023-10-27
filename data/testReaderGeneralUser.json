@@ -1,0 +1,46 @@
+{
+  "exercises": [
+    {
+      "name": "Bench Press",
+      "oneRepMax": 0,
+      "minPercentBodyWeightForStrong": 1
+    },
+    {
+      "name": "Dead Lift",
+      "oneRepMax": 0,
+      "minPercentBodyWeightForStrong": 2
+    }
+  ],
+  "workouts": [
+    {
+      "date": "2023-09-20",
+      "sets": [{
+        "reps": 5,
+        "name": "Bench Press",
+        "weight": 120,
+        "oneRepMax": 0,
+        "minPercentBodyWeightForStrong": 1
+      }]
+    },
+    {
+      "date": "2023-09-30",
+      "sets": [
+        {
+          "reps": 7,
+          "name": "Bench Press",
+          "weight": 135,
+          "oneRepMax": 0,
+          "minPercentBodyWeightForStrong": 1
+        },
+        {
+          "reps": 1,
+          "name": "Dead Lift",
+          "weight": 225,
+          "oneRepMax": 0,
+          "minPercentBodyWeightForStrong": 2
+        }
+      ]
+    }
+  ],
+  "bodyWeight": 135
+}

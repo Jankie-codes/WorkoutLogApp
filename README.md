@@ -38,3 +38,5 @@ total repetitions, and date.
 - As a user, I want to be able to view my one-rep maxes for each type of lift.
 - As a user, I want to be able to see whether I am strong for my body weight at any particular lift.
 - As a user, I want to be able to see my PRs over time for any particular lift.
+- As a user, I want to be able to save my previous workout data to file (if I so choose).
+- As a user, I want to be able to load my previous workout data from file (if I so choose).

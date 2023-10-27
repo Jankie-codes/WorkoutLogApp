@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 //represents a type of exercise movement with a name,
 // a minimum percentage of body weight which must be lifted for 1 rep for a lifter to be
 // considered strong at this movement, and
 // the maximum amount of weight which the user should be able to lift for one rep; a one-rep-max.
-public class Exercise {
+public class Exercise implements Writable {
     String name;
     double minPercentBodyWeightForStrong;
     double oneRepMax;
@@ -67,4 +70,12 @@ public class Exercise {
     //    this.minPercentBodyWeightForStrong = minPercentBodyWeightForStrong;
     //}
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("minPercentBodyWeightForStrong", minPercentBodyWeightForStrong);
+        json.put("oneRepMax", oneRepMax);
+        return json;
+    }
 }
