@@ -15,7 +15,8 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
-//!!!
+//Code influenced by the JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+// Represents a reader that reads User from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -24,7 +25,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads User from file and returns it;
     // throws IOException if an error occurs reading data from file
     public User read() throws IOException {
         String jsonData = readFile(source);
@@ -43,7 +44,8 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses User from JSON object and returns it
+    // User's bodyweight, exercises, and workouts are restored
     private User parseUser(JSONObject jsonObject) {
         User u = new User();
         int bodyWeight = jsonObject.getInt("bodyWeight");
@@ -53,21 +55,19 @@ public class JsonReader {
         return u;
     }
 
-    //!!! ADD APPROPRIATE FIELDS
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: u
+    // EFFECTS: parses workouts from JSON object and adds them to user's list of workouts
     private void addWorkouts(User u, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("workouts");
         for (Object json : jsonArray) {
             JSONObject nextWorkout = (JSONObject) json;
             Workout w = parseWorkout(u, nextWorkout);
-            u.addWorkout(w);//possible error when adding
+            u.addWorkout(w);
         }
     }
 
-    //!!! ADD APPROPRIATE FIELDS
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: u
+    // EFFECTS: parses exercises from JSON object and adds them to User's list of exercises
     private void addExercises(User u, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("exercises");
         for (Object json : jsonArray) {
@@ -76,21 +76,16 @@ public class JsonReader {
         }
     }
 
-
-
-    //!!!
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // EFFECTS: parses workout from JSON object and returns it
     private Workout parseWorkout(User u, JSONObject jsonObject) {
-        LocalDate date = LocalDate.parse(jsonObject.getString("date")); //POSSIBLE RUNTIME ERROR
+        LocalDate date = LocalDate.parse(jsonObject.getString("date"));
         Workout w = new Workout(date);
         addSets(u, w, jsonObject);
         return w;
     }
 
-    //!!! ADD APPROPRIATE FIELDS
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: w
+    // EFFECTS: parses all sets from JSON object and adds them to workout
     private void addSets(User u, Workout w, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("sets");
         for (Object json : jsonArray) {
@@ -99,9 +94,8 @@ public class JsonReader {
         }
     }
 
-    //!!!
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: w
+    // EFFECTS: parses a single set from JSON object and adds it to workout
     private void addSet(User u, Workout w, JSONObject jsonObject) {
         String exerciseName = jsonObject.getString("name");
         double minPercentBodyWeightForStrong = jsonObject.getDouble("minPercentBodyWeightForStrong");
@@ -123,9 +117,8 @@ public class JsonReader {
         w.addSet(set);
     }
 
-    //!!!
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: u
+    // EFFECTS: parses exercise from JSON object and adds it to User
     private void addExercise(User u, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         double minPercentBodyWeightForStrong = jsonObject.getDouble("minPercentBodyWeightForStrong");

@@ -5,7 +5,8 @@ import model.User;
 
 import java.io.*;
 
-//ADD CITATION
+//Code influenced by the JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+//Represents a writer that writes JSON representation of User to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -24,7 +25,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file !!!
+    // EFFECTS: writes JSON representation of User to file
     public void write(User u) {
         JSONObject json = u.toJson();
         saveToFile(json.toString(TAB));

@@ -42,6 +42,7 @@ public class Workout implements Writable {
         return json;
     }
 
+    //EFFECTS: returns this workout's sets (found in this.sets) as a JSON array
     private JSONArray setsToJson() {
         JSONArray jsonArray = new JSONArray();
 

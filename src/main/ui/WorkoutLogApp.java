@@ -67,8 +67,6 @@ public class WorkoutLogApp {
             "Enter reps (must be greater than 0):\n",
 
             "Choose date (mm-dd-yyyy):\n"
-
-
     };
 
     //EFFECTS: runs the teller application
@@ -80,6 +78,8 @@ public class WorkoutLogApp {
     //EFFECTS: initializes 3 new exercises: squat, benchPress, and deadLift, and initializes a new user with these
     // 3 exercises in his/her list of exercises. Also initializes a new decimal format to use when rounding weight
     // values, and initializes the scanner.
+
+    //Initializes new jsonWriter and jsonReader in case the user wants to save or load data.
     public void init() {
         user = new User();
         benchPress = new Exercise("Bench Press", 1.0);
@@ -348,7 +348,8 @@ public class WorkoutLogApp {
         System.out.println("\n");
     }
 
-    // EFFECTS: saves the workroom to file
+    //Code influenced by the JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+    // EFFECTS: saves all User data to file
     private void saveUser() {
         try {
             jsonWriter.open();
@@ -360,8 +361,9 @@ public class WorkoutLogApp {
         }
     }
 
+    //Code influenced by the JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads User from file
     private void loadUser() {
         try {
             user = jsonReader.read();

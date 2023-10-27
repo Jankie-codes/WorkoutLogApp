@@ -6,6 +6,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//Code influenced by the JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonTest {
     protected void checkExercise(String name, double minPercent, double oneRepMax, Exercise exercise) {
         assertEquals(name, exercise.getName());

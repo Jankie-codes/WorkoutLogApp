@@ -123,8 +123,8 @@ public class User implements Writable {
         return false;
     }
 
-    //!!! UNTESTED
-    //returns null if not found.
+    //EFFECTS: if an Exercise with the given exerciseName exists in this.exercises, returns it
+    // otherwise, returns null
     public Exercise getExercise(String exerciseName) {
         for (Exercise exercise : this.exercises) {
             if (exercise.getName().equals(exerciseName)) {
@@ -143,8 +143,7 @@ public class User implements Writable {
         return json;
     }
 
-    //!!!
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns this user's workouts (listed in this.workouts) as a JSON array
     private JSONArray workoutsToJson() {
         JSONArray jsonArray = new JSONArray();
 
@@ -155,8 +154,7 @@ public class User implements Writable {
         return jsonArray;
     }
 
-    //!!!
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns this user's exercises (listed in this.exercises) as a JSON array
     private JSONArray exercisesToJson() {
         JSONArray jsonArray = new JSONArray();
 
