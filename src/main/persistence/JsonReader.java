@@ -112,7 +112,6 @@ public class JsonReader {
 
         int weight = jsonObject.getInt("weight");
         int reps = jsonObject.getInt("reps");
-
         ExerciseSet set = new ExerciseSet(exercise, weight, reps);
         w.addSet(set);
     }

@@ -232,4 +232,9 @@ public class UserTest {
         testUser.setBodyWeight(135);
         assertEquals(135, testUser.getBodyWeight());
     }
+
+    @Test
+    public void testGetExerciseWhichDoesNotExist() {
+        assertNull(testUser.getExercise("Exercise which does not exist"));
+    }
 }

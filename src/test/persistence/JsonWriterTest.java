@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class JsonWriterTest extends JsonTest {
     Exercise benchPress;
     Exercise deadLift;
+    Exercise squat;
     Workout testWorkout1;
     Workout testWorkout2;
     LocalDate date1;
@@ -25,11 +26,13 @@ public class JsonWriterTest extends JsonTest {
     ExerciseSet set1;
     ExerciseSet set2;
     ExerciseSet set3;
+    ExerciseSet set4;
 
     @BeforeEach
     public void runBefore() {
         benchPress = new Exercise("Bench Press", 1.0);
         deadLift = new Exercise("Dead Lift", 2.0);
+        squat = new Exercise("Squat", 1.75);
 
         date1 = LocalDate.of(2023,9,20);
         date2 = LocalDate.of(2023,9,30);
@@ -39,6 +42,7 @@ public class JsonWriterTest extends JsonTest {
         set1 = new ExerciseSet(benchPress, 120, 5);
         set2 = new ExerciseSet(benchPress, 135, 7);
         set3 = new ExerciseSet(deadLift, 225, 1);
+        set4 = new ExerciseSet(squat, 175, 1);
     }
 
     @Test
@@ -81,10 +85,12 @@ public class JsonWriterTest extends JsonTest {
             u.setBodyWeight(135);
             u.addExercise(benchPress);
             u.addExercise(deadLift);
+            u.addExercise(squat);
 
             testWorkout1.addSet(set1);
             testWorkout2.addSet(set2);
             testWorkout2.addSet(set3);
+            testWorkout2.addSet(set4);
             u.addWorkout(testWorkout1);
             u.addWorkout(testWorkout2);
 
@@ -97,13 +103,16 @@ public class JsonWriterTest extends JsonTest {
             u = reader.read();
             assertEquals(135, u.getBodyWeight());
 
-            assertEquals(2, u.getExercises().size());
+            assertEquals(3, u.getExercises().size());
             checkExercise(benchPress.getName(),
                     benchPress.getMinPercentBodyWeightForStrong(),
                     benchPress.getOneRepMax(), u.getExercises().get(0));
             checkExercise(deadLift.getName(),
                     deadLift.getMinPercentBodyWeightForStrong(),
                     deadLift.getOneRepMax(), u.getExercises().get(1));
+            checkExercise(squat.getName(),
+                    squat.getMinPercentBodyWeightForStrong(),
+                    squat.getOneRepMax(), u.getExercises().get(2));
 
             assertEquals(2, u.getWorkouts().size());
 
@@ -114,6 +123,7 @@ public class JsonWriterTest extends JsonTest {
             setsExpected = new ArrayList<>();
             setsExpected.add(set2);
             setsExpected.add(set3);
+            setsExpected.add(set4);
             checkWorkout(date2, setsExpected, u.getWorkouts().get(1));
         } catch (IOException e) {
             fail("Exception should not have been thrown");
