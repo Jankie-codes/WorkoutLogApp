@@ -1,6 +1,7 @@
 package ui;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class WorkoutLogAppGUI extends JFrame {
     private static final int WIDTH = 600;
@@ -10,7 +11,8 @@ public class WorkoutLogAppGUI extends JFrame {
         super("WorkoutLogApp");
         setSize(WIDTH, HEIGHT);
         SplashScreen splashScreen = new SplashScreen();
-        add(splashScreen);
+        add(splashScreen, BorderLayout.CENTER);
+        setLayout(new BorderLayout(10, 5));
         setVisible(true);
     }
 }
