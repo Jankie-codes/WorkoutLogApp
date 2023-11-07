@@ -1,2 +1,11 @@
 *.class
 workspace.xml
+.DS_Store
+.idea/.DS_Store
+data/testWriterEmptyUser.json
+data/testWriterGeneralUser.json
+data/user.json
+lib/.DS_Store
+lib/spec/.DS_Store
+out/
+src/.DS_Store
