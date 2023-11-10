@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.LocalDate;
 
+import model.exceptions.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -125,13 +126,13 @@ public class User implements Writable {
 
     //EFFECTS: if an Exercise with the given exerciseName exists in this.exercises, returns it
     // otherwise, returns null
-    public Exercise getExercise(String exerciseName) {
+    public Exercise getExercise(String exerciseName) throws ExerciseNotFoundException {
         for (Exercise exercise : this.exercises) {
             if (exercise.getName().equals(exerciseName)) {
                 return exercise;
             }
         }
-        return null;
+        throw new ExerciseNotFoundException();
     }
 
     @Override

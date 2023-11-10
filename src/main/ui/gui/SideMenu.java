@@ -1,4 +1,6 @@
-package ui;
+package ui.gui;
+
+import ui.gui.lambda_components.LambdaButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +28,7 @@ public class SideMenu extends JPanel {
         gbc.gridy = 1;
         JButton viewWorkoutHistoryButton = new LambdaButton("View workout history", e -> {
             controller.hideAllPanels();
+            controller.refreshViewHistoryPanel();
             controller.setPanelVisible(1);
         });
         add(viewWorkoutHistoryButton, gbc);
@@ -33,6 +36,8 @@ public class SideMenu extends JPanel {
         gbc.gridy = 2;
         JButton saveWorkoutLogButton = new LambdaButton("Save workout log", e -> {
             controller.hideAllPanels();
+            controller.saveUser();
+            controller.refreshSavedDataPanel();
             controller.setPanelVisible(2);
         });
         add(saveWorkoutLogButton, gbc);
@@ -40,6 +45,8 @@ public class SideMenu extends JPanel {
         gbc.gridy = 3;
         JButton loadWorkoutLogButton = new LambdaButton("Load workout log", e -> {
             controller.hideAllPanels();
+            controller.loadUser();
+            controller.refreshLoadedDataPanel();
             controller.setPanelVisible(3);
         });
         add(loadWorkoutLogButton, gbc);

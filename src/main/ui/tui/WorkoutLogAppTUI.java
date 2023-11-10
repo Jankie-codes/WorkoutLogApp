@@ -1,4 +1,4 @@
-package ui;
+package ui.tui;
 
 import model.*;
 
@@ -14,7 +14,7 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 //Workout log application
-public class WorkoutLogApp {
+public class WorkoutLogAppTUI {
     private static final String JSON_STORE = "./data/user.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -70,7 +70,7 @@ public class WorkoutLogApp {
     };
 
     //EFFECTS: runs the teller application
-    public WorkoutLogApp() {
+    public WorkoutLogAppTUI() {
         runFitnessTrackerApp();
     }
 

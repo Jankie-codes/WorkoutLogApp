@@ -1,6 +1,8 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import model.exceptions.ExerciseNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -235,6 +237,11 @@ public class UserTest {
 
     @Test
     public void testGetExerciseWhichDoesNotExist() {
-        assertNull(testUser.getExercise("Exercise which does not exist"));
+        try {
+            testUser.getExercise("Exercise which does not exist");
+            fail("ExerciseNotFoundException was not thrown");
+        } catch (ExerciseNotFoundException enfe) {
+            //expected
+        }
     }
 }

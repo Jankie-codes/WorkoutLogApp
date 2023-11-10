@@ -1,4 +1,4 @@
-package ui;
+package ui.gui.lambda_components;
 
 import java.util.function.Consumer;
 
