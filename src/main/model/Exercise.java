@@ -70,6 +70,7 @@ public class Exercise implements Writable {
     //    this.minPercentBodyWeightForStrong = minPercentBodyWeightForStrong;
     //}
 
+    // EFFECTS: returns this as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

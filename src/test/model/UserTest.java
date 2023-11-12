@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class UserTest {
     User testUser;
@@ -118,7 +119,7 @@ public class UserTest {
 
     @Test
     public void testListPRsNoSetsAdded() {
-        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
+        TreeMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(0, personalRecords.size());
     }
 
@@ -127,7 +128,7 @@ public class UserTest {
         testWorkout1.addSet(set1);
         testUser.addWorkout(testWorkout1);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
+        TreeMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(1, personalRecords.size());
         assertEquals(set1, personalRecords.get(date1));
     }
@@ -140,7 +141,7 @@ public class UserTest {
 
         testUser.addWorkout(testWorkout1);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
+        TreeMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(1, personalRecords.size());
         assertEquals(set2, personalRecords.get(date1));
     }
@@ -153,7 +154,7 @@ public class UserTest {
         testUser.addWorkout(testWorkout1);
         testUser.addWorkout(testWorkout4);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
+        TreeMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(2, personalRecords.size());
         assertEquals(set1, personalRecords.get(date1));
         assertEquals(set2, personalRecords.get(date2));
@@ -167,7 +168,7 @@ public class UserTest {
         testUser.addWorkout(testWorkout1);
         testUser.addWorkout(testWorkout4);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
+        TreeMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(1, personalRecords.size());
         assertEquals(set2, personalRecords.get(date1));
     }
@@ -180,7 +181,7 @@ public class UserTest {
         testUser.addWorkout(testWorkout1);
         testUser.addWorkout(testWorkout4);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
+        TreeMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(1, personalRecords.size());
         assertEquals(set1, personalRecords.get(date1));
     }
@@ -193,7 +194,7 @@ public class UserTest {
         testUser.addWorkout(testWorkout1);
         testUser.addWorkout(testWorkout4);
 
-        HashMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
+        TreeMap<LocalDate, ExerciseSet> personalRecords = testUser.listPRs(benchPress);
         assertEquals(1, personalRecords.size());
         assertEquals(set4, personalRecords.get(date1));
     }
@@ -243,5 +244,17 @@ public class UserTest {
         } catch (ExerciseNotFoundException enfe) {
             //expected
         }
+    }
+
+    @Test
+    public void testGetExerciseNamesStringNoExercisesAdded() {
+        assertEquals("", testUser.getExerciseNamesString());
+    }
+
+    @Test
+    public void testGetExerciseNamesStringMultipleExercisesAdded() {
+        testUser.addExercise(benchPress);
+        testUser.addExercise(deadLift);
+        assertEquals("Bench Press\nDead Lift", testUser.getExerciseNamesString());
     }
 }

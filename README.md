@@ -10,7 +10,6 @@ Using this data, the application will be able to:
 - Show past workout history
 - Calculate one-rep maxes* for any given lift
 - Determine whether the user is strong for their body weight at any particular lift
-- Graph one-rep max progression over time, allowing the user to see their strength progress
 
 (Not an exhaustive list of features)
 
@@ -40,3 +39,10 @@ total repetitions, and date.
 - As a user, I want to be able to see my PRs over time for any particular lift.
 - As a user, I want to be able to save my previous workout data to file (if I so choose).
 - As a user, I want to be able to load my previous workout data from file (if I so choose).
+
+## Instructions for Grader
+
+- You can generate the first required action related to adding sets to a workout by clicking the "Add set" button on the
+sidebar, filling in information for the exercise, weight, reps, and date, and clicking the "Add set" button below to 
+process the information.
+- 

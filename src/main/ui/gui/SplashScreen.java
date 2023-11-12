@@ -5,15 +5,18 @@ import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
+//Represents a splash screen which adds an app logo and displays loading text for three seconds
 public class SplashScreen extends JPanel {
-    GridBagConstraints gbc; //manages locations of various text and images on the panel
+    static final int LOGO_WIDTH = 150;
+    static final int LOGO_HEIGHT = 150;
+    GridBagConstraints gbc;
     JLabel loadingText;
 
-    //adds logo, thank you text, and loading text to JPanel
+    //EFFECTS: constructs a new SplashScreen (with appropriate size and layout)
+    // and draws a logo image, thanks text, and loading text onto it.
     public SplashScreen() {
         super();
-        setSize(600, 400); //must reduce coupling here
+        setSize(WorkoutLogAppGUI.WIDTH, WorkoutLogAppGUI.HEIGHT);
         setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
 
@@ -23,7 +26,7 @@ public class SplashScreen extends JPanel {
         this.setVisible(true);
     }
 
-    //!!!
+    //EFFECTS: constructs a new URL based off of the given urlString
     private URL instantiateURL(String urlString) {
         URL resultingURL;
         try {
@@ -34,15 +37,17 @@ public class SplashScreen extends JPanel {
         }
     }
 
-    //scales logo image, then adds it to panel
-    public void addLogo() {
+    //MODIFIES: this
+    //EFFECTS: scales the logo image, then draws it onto the splashscreen
+    private void addLogo() {
         URL logoURL = instantiateURL("https://static.vecteezy.com"
                 + "/system/resources/previews/007/121/730/original/"
                 + "weightlifting-icon-on-white-vector.jpg");
         ImageIcon logoImageIcon = new ImageIcon(logoURL);
-        Image logoScaled = logoImageIcon.getImage().getScaledInstance(150,150, java.awt.Image.SCALE_SMOOTH);
+        Image logoScaled = logoImageIcon.getImage().getScaledInstance(LOGO_WIDTH, LOGO_HEIGHT,
+                java.awt.Image.SCALE_SMOOTH);
         logoImageIcon = new ImageIcon(logoScaled);
-        JLabel logoLabel = new JLabel(logoImageIcon); //might throw nullPointerException
+        JLabel logoLabel = new JLabel(logoImageIcon);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -50,8 +55,11 @@ public class SplashScreen extends JPanel {
         logoLabel.setVisible(true);
     }
 
-    public void addThanksText() {
+    //MODIFIES: this
+    //EFFECTS: creates a vertical strut of height 50 and then draws thank you text below the strut
+    private void addThanksText() {
         JLabel thanksText = new JLabel("Thanks for using WorkoutLogApp!");
+
         gbc.gridy = 1;
         add(Box.createVerticalStrut(50), gbc);
         gbc.gridy = 2;
@@ -59,7 +67,9 @@ public class SplashScreen extends JPanel {
         thanksText.setVisible(true);
     }
 
-    public void addLoadingText() {
+    //MODIFIES: this
+    //EFFECTS: creates a vertical strut of height 50 and then draws loading text below the strut
+    private void addLoadingText() {
         loadingText = new JLabel("Loading");
         gbc.gridy = 3;
         add(Box.createVerticalStrut(50), gbc);
@@ -69,6 +79,10 @@ public class SplashScreen extends JPanel {
         loadingText.setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECTS: animates the loading text.
+    // Accomplishes this by adding a "." to the end of the loading text every 500 milliseconds,
+    // then changing the loading text to display "Ready!" after 3 periods have been added.
     public void playLoadingText() {
         int timeBetweenAnimations = 500;
         try {

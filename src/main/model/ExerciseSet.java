@@ -56,6 +56,7 @@ public class ExerciseSet implements Writable {
     //    this.reps = reps;
     //}
 
+    // EFFECTS: returns this as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

@@ -34,6 +34,7 @@ public class Workout implements Writable {
         return this.sets;
     }
 
+    // EFFECTS: returns this as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

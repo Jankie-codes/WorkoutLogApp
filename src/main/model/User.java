@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.LocalDate;
+import java.util.TreeMap;
 
 import model.exceptions.*;
 import org.json.JSONArray;
@@ -58,14 +59,15 @@ public class User implements Writable {
     }
 
     //REQUIRES: exercise must be in this.exercises
-    //EFFECTS: returns a hashmap containing the all the user's sets which are personal weightlifting records
+    //EFFECTS: returns a treemap containing the all the user's sets which are personal weightlifting records
     // (PRs) for a given exercise. Each value is an exerciseSet, and each key is the date when the set was performed.
     //If multiple personal records occur on the same day, only include the strongest set (i.e. with a higher
     // theoreticalOneRepMax).
     //Tying records are not added.
-    public HashMap<LocalDate, ExerciseSet> listPRs(Exercise exercise) {
+    //LocalDate keys are organized in chronological order.
+    public TreeMap<LocalDate, ExerciseSet> listPRs(Exercise exercise) {
         double oneRepMaxSoFar = 0;
-        HashMap<LocalDate, ExerciseSet> personalRecords = new HashMap<>();
+        TreeMap<LocalDate, ExerciseSet> personalRecords = new TreeMap<>();
 
         for (int i = 0; i <= (this.workouts.size() - 1); i++) {
             for (ExerciseSet set : this.workouts.get(i).getSets()) {
@@ -135,6 +137,19 @@ public class User implements Writable {
         throw new ExerciseNotFoundException();
     }
 
+    //EFFECTS: returns a String of all exercise names in this.exercises, each one separated by a new line.
+    // Exercise names are printed in order of this.exercises ArrayList.
+    public String getExerciseNamesString() {
+        String listOfNames = "";
+        for (Exercise exercise : this.getExercises()) {
+            listOfNames += exercise.getName();
+            listOfNames += "\n";
+        }
+        listOfNames = listOfNames.trim();
+        return listOfNames;
+    }
+
+    // EFFECTS: returns this as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

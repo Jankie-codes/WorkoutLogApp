@@ -9,11 +9,12 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.TreeMap;
 
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-//Workout log application
+//Workout log application, in the form of a Text-based User Interface
 public class WorkoutLogAppTUI {
     private static final String JSON_STORE = "./data/user.json";
     private JsonWriter jsonWriter;
@@ -305,13 +306,14 @@ public class WorkoutLogAppTUI {
     }
 
     //EFFECTS: prints the user's PR history for a given exercise
-    //PR History is not displayed chronologically (yet)
+    //PR History is displayed chronologically
     public void printPRHistory(Exercise exercise) {
-        HashMap<LocalDate, ExerciseSet> personalRecordHistory = user.listPRs(exercise);
+        TreeMap<LocalDate, ExerciseSet> personalRecordHistory = user.listPRs(exercise);
         System.out.println(exercise.getName() + " PR History:\n");
         personalRecordHistory.forEach((k,v) -> System.out.println("Date: " + k + " PR: "
                 + User.roundToBarbellWeight(v.theoreticalOneRepMax())
-                + " " + UNITS + "\n"));
+                + " " + UNITS + " 1RM"
+                + " (" + v.getWeight() + " " + UNITS + " " + v.getReps() + " reps)" + "\n"));
     }
 
     //EFFECTS: print the user's full workout history.
