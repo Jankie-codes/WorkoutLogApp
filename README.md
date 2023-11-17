@@ -40,9 +40,21 @@ total repetitions, and date.
 - As a user, I want to be able to save my previous workout data to file (if I so choose).
 - As a user, I want to be able to load my previous workout data from file (if I so choose).
 
-## Instructions for Grader
+# Instructions for Grader
 
-- You can generate the first required action related to adding sets to a workout by clicking the "Add set" button on the
-sidebar, filling in information for the exercise, weight, reps, and date, and clicking the "Add set" button below to 
-process the information.
-- 
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking the 
+"Add set" button on the sidebar on the left, filling in information for the exercise, weight, reps, and date, then
+clicking the "Add set" button below all the text fields to process the information and attempt to add a new set to the 
+workout log. Red text showing an error message will appear if any of the inputs are invalid. However, if all inputs
+are valid, the app will either add the set to an existing workout on the given date, or (if a workout does not exist
+yet on that date) create a new workout on the given date and add the given set to it. Keep in mind that the app ensures
+that only one workout can exist for each day.
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking 
+"view PR history" on the sidebar on the left, then filling in the "choose an exercise" text field with one of the 
+given exercises listed on the right and pressing enter. Doing this will display a list of all the sets added which were
+a new strength record (PR) for the given exercise, along with the date they were performed, the weight lifted, the 
+number of reps, and the set's theoretical one rep max.
+- You can locate my visual component by running main and opening the app, which will display a splash screen that 
+includes a logo, text thanking the user for using the app, and loading text.
+- You can save the state of my application by clicking the "save workout log" button on the sidebar on the left.
+- You can reload the state of my application by clicking the "load workout log" button on the sidebar on the left.

@@ -12,7 +12,7 @@ import java.time.temporal.ChronoUnit;
 
 import model.*;
 import ui.gui.WorkoutLogAppGUI;
-import ui.gui.exceptions.EmptyInputException;
+import ui.gui.exceptions.*;
 import ui.gui.lambdacomponents.LambdaButton;
 import ui.gui.lambdacomponents.LambdaTextField;
 
@@ -86,6 +86,7 @@ public class AddSetPanel extends JPanel {
 
     //MODIFIES: this
     //EFFECTS: draws all necessary components onto this JPanel
+    @SuppressWarnings("methodlength")
     private void drawAllComponents() {
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -143,12 +144,12 @@ public class AddSetPanel extends JPanel {
         scrollPane.setPreferredSize(new Dimension(LIST_OF_EXERCISES_TEXT_BOX_WIDTH, LIST_OF_EXERCISES_TEXT_BOX_HEIGHT));
     }
 
+    //MODIFIES: this
+    //EFFECTS: prints red error text along with an appropriate error description if the user submits invalid data
+    // (e.g. improper date format, empty input, etc.)
+    // if inputs are not erroneous, attempts to add a given set to the workout log based on user inputs.
+    @SuppressWarnings("methodlength")
     private void attemptToAddSet() {
-        chooseExerciseTextField.getText();
-        chooseWeightTextField.getText();
-        chooseRepsTextField.getText();
-        chooseDateTextField.getText();
-
         if (allInputsEmpty()) {
             setRedText("Error: all inputs are empty");
             return;
@@ -176,6 +177,9 @@ public class AddSetPanel extends JPanel {
         } catch (EmptyInputException eie) {
             setRedText("Error: weight input empty");
             return;
+        } catch (NegativeValueException nve) {
+            setRedText("Error: weight input negative");
+            return;
         } catch (NumberFormatException nfe) {
             setRedText("Error: invalid weight input");
             return;
@@ -185,6 +189,9 @@ public class AddSetPanel extends JPanel {
             processRepsInput(this.userToModify);
         } catch (EmptyInputException eie) {
             setRedText("Error: reps input empty");
+            return;
+        } catch (NegativeValueException nve) {
+            setRedText("Error: reps input negative");
             return;
         } catch (NumberFormatException nfe) {
             setRedText("Error: invalid rep input");
@@ -200,7 +207,14 @@ public class AddSetPanel extends JPanel {
             setRedText("Error: invalid date input. Recheck formatting!");
             return;
         }
+        addSetToExistingWorkoutOrNewOne();
+    }
 
+    //MODIFIES: this
+    //EFFECTS: creates a new ExerciseSet, and depending on dateSelected, creates a new workout on dateSelected and
+    // adds the set to it, OR adds the set to an existing workout on that day.
+    // this is done to ensure that each day only has one workout.
+    private void addSetToExistingWorkoutOrNewOne() {
         ExerciseSet setToBeMade = new ExerciseSet(exerciseChosen, weightChosen, repsChosen);
         if (!(this.userToModify.workoutExistsOnDate(dateSelected))) {
             Workout workoutToBeMade = new Workout(dateSelected);
@@ -274,11 +288,16 @@ public class AddSetPanel extends JPanel {
     //MODIFIES: this
     //EFFECTS: processes the weight input in this.chooseWeightTextField.
     // If weight input is empty, throws EmptyInputException
+    // If weight input is negative, throws NegativeValueException
     // Otherwise, attempts to set weightChosen to the given weight input, and throws NumberFormatException if the
     // input cannot be converted to an int
-    private void processWeightInput(User userToModify) throws EmptyInputException, NumberFormatException {
+    private void processWeightInput(User userToModify) throws EmptyInputException, NumberFormatException,
+            NegativeValueException {
         if (chooseWeightTextField.getText().equals("")) {
             throw new EmptyInputException();
+        }
+        if (Integer.parseInt(chooseWeightTextField.getText()) < 0) {
+            throw new NegativeValueException();
         }
         weightChosen = Integer.parseInt(chooseWeightTextField.getText());
     }
@@ -288,12 +307,15 @@ public class AddSetPanel extends JPanel {
     // If reps input is empty, throws EmptyInputException
     // Otherwise, attempts to set repsChosen to the given reps input, and throws NumberFormatException if the
     // input cannot be converted to an int
-    private void processRepsInput(User userToModify) throws EmptyInputException, NumberFormatException {
+    private void processRepsInput(User userToModify) throws EmptyInputException, NumberFormatException,
+            NegativeValueException {
         if (chooseRepsTextField.getText().equals("")) {
             throw new EmptyInputException();
         }
+        if (Integer.parseInt(chooseRepsTextField.getText()) < 0) {
+            throw new NegativeValueException();
+        }
         repsChosen = Integer.parseInt(chooseRepsTextField.getText());
-
     }
 
     //MODIFIES: this

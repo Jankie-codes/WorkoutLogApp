@@ -237,6 +237,19 @@ public class UserTest {
     }
 
     @Test
+    public void testGetExerciseWhichDoesExist() {
+        Exercise exerciseFound;
+        testUser.addExercise(benchPress);
+        testUser.addExercise(deadLift);
+        try {
+            exerciseFound = testUser.getExercise("Bench Press");
+            assertEquals(benchPress, exerciseFound);
+        } catch (ExerciseNotFoundException enfe) {
+            fail("ExerciseNotFoundException was thrown unexpectedly");
+        }
+    }
+
+    @Test
     public void testGetExerciseWhichDoesNotExist() {
         try {
             testUser.getExercise("Exercise which does not exist");
@@ -245,6 +258,45 @@ public class UserTest {
             //expected
         }
     }
+
+    @Test
+    public void testGetExerciseMixedCases() {
+        Exercise exerciseFound;
+        testUser.addExercise(benchPress);
+        testUser.addExercise(deadLift);
+        try {
+            exerciseFound = testUser.getExercise("bEnCh pReSs");
+            assertEquals(benchPress, exerciseFound);
+        } catch (ExerciseNotFoundException enfe) {
+            fail("ExerciseNotFoundException was thrown unexpectedly");
+        }
+    }
+
+//    @Test
+//    public void testGetExerciseNoSpaces() {
+//        Exercise exerciseFound;
+//        testUser.addExercise(benchPress);
+//        testUser.addExercise(deadLift);
+//        try {
+//            exerciseFound = testUser.getExercise("bEnChpReSs");
+//            assertEquals(benchPress, exerciseFound);
+//        } catch (ExerciseNotFoundException enfe) {
+//            fail("ExerciseNotFoundException was thrown unexpectedly");
+//        }
+//    }
+
+//    @Test
+//    public void testGetExerciseIncorrectSpaces() {
+//        Exercise exerciseFound;
+//        testUser.addExercise(benchPress);
+//        testUser.addExercise(deadLift);
+//        try {
+//            exerciseFound = testUser.getExercise("bEn   Ch p R e   Ss  ");
+//            assertEquals(benchPress, exerciseFound);
+//        } catch (ExerciseNotFoundException enfe) {
+//            fail("ExerciseNotFoundException was thrown unexpectedly");
+//        }
+//    }
 
     @Test
     public void testGetExerciseNamesStringNoExercisesAdded() {

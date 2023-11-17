@@ -55,6 +55,7 @@ public class PRHistoryPanel extends JPanel {
 
     //MODIFIES: this
     //EFFECTS: draws all necessary components onto this JPanel
+    @SuppressWarnings("methodlength")
     private void drawComponents() {
         gbc.gridx = 0;
         gbc.gridy = 0;

@@ -32,6 +32,7 @@ public class Sidebar extends JPanel {
     //MODIFIES: this
     //EFFECTS: initializes all sidebar buttons with appropriate names and
     // lambda expressions to be performed when each is clicked.
+    @SuppressWarnings("methodlength")
     private void initButtons(WorkoutLogAppGUI controller) {
         buttons[0] = new LambdaButton("Add set", e -> {
             controller.hideAllPanels();

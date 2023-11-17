@@ -128,9 +128,10 @@ public class User implements Writable {
 
     //EFFECTS: if an Exercise with the given exerciseName exists in this.exercises, returns it
     // otherwise, returns null
+    // does not check strings for case sensitivity
     public Exercise getExercise(String exerciseName) throws ExerciseNotFoundException {
         for (Exercise exercise : this.exercises) {
-            if (exercise.getName().equals(exerciseName)) {
+            if (exercise.getName().equalsIgnoreCase(exerciseName)) {
                 return exercise;
             }
         }
