@@ -58,3 +58,96 @@ number of reps, and the set's theoretical one rep max.
 includes a logo, text thanking the user for using the app, and loading text.
 - You can save the state of my application by clicking the "save workout log" button on the sidebar on the left.
 - You can reload the state of my application by clicking the "load workout log" button on the sidebar on the left.
+
+# Phase 4: Task 2
+
+Representative sample event log:
+>Sun Nov 26 16:57:04 PST 2023
+>Previously-saved user data successfully obtained from existing file.
+>
+>Sun Nov 26 16:57:04 PST 2023
+>User's bodyweight set to: 135
+>
+>Sun Nov 26 16:57:04 PST 2023
+>Added a new set to a workout on the given date: 2023-10-10
+><br>Set specifications:
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Exercise: Bench Press
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Weight: 135
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Reps: 10
+>
+>Sun Nov 26 16:57:04 PST 2023
+>Added a new set to a workout on the given date: 2023-10-10
+><br>Set specifications:
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Exercise: Bench Press
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Weight: 225
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Reps: 5
+>
+>Sun Nov 26 16:57:04 PST 2023
+>Added a new workout to the workout log on the given date: 2023-10-10
+>
+>Sun Nov 26 16:57:04 PST 2023
+>Added a new set to a workout on the given date: 2023-11-13
+><br>Set specifications:
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Exercise: Squat
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Weight: 225
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Reps: 5
+>
+>Sun Nov 26 16:57:04 PST 2023
+>Added a new workout to the workout log on the given date: 2023-11-13
+>
+>Sun Nov 26 16:57:22 PST 2023
+>Added a new workout to the workout log on the given date: 2023-12-01
+>
+>Sun Nov 26 16:57:22 PST 2023
+>Added a new set to a workout on the given date: 2023-12-01
+><br>Set specifications:
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Exercise: Bench Press
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Weight: 225
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Reps: 5
+>
+>Sun Nov 26 16:57:30 PST 2023
+>Added a new set to a workout on the given date: 2023-12-01
+><br>Set specifications:
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Exercise: Squat
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Weight: 315
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Reps: 6
+>
+>Sun Nov 26 16:57:35 PST 2023
+>Added a new workout to the workout log on the given date: 2023-12-05
+>
+>Sun Nov 26 16:57:35 PST 2023
+>Added a new set to a workout on the given date: 2023-12-05
+><br>Set specifications:
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Exercise: Squat
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Weight: 315
+><br>&nbsp;&nbsp;&nbsp;&nbsp;Reps: 6
+>
+>Sun Nov 26 16:57:42 PST 2023
+>User's bodyweight set to: 145
+>
+>Sun Nov 26 16:57:48 PST 2023
+>Treemap of PR History obtained for the given exercise: Bench Press
+>
+>Sun Nov 26 16:57:55 PST 2023
+>Treemap of PR History obtained for the given exercise: Squat
+>
+>Sun Nov 26 16:58:00 PST 2023
+>Current user data successfully saved and written to file.
+
+NOTE:
+Events are logged when:
+- A new workout is added to the user's list of workouts
+- A new set is added to a workout on a specific date
+- The user's bodyweight value is changed
+- The user's PR history for a given exercise is obtained
+- User data is saved and written to file
+- User data is loaded from file
+
+Events are **not** logged when the user attempts to view workout history, view 1-rep-maxes, or view relative strength. 
+This is because those three user actions involve classes within the GUI package accessing various model fields and 
+information using getter methods. Students are not allowed to log events within the UI package, and logging an 
+event every time a getter method is called would clutter the event log, so I decided to not log these three user actions
+at all. 
+
+TA Trevor Glennon approved this decision in the following Piazza post: 
+https://piazza.com/class/lly08e6z2hzwn/post/1488_f1
