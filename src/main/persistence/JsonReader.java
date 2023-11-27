@@ -1,9 +1,6 @@
 package persistence;
 
-import model.User;
-import model.Workout;
-import model.Exercise;
-import model.ExerciseSet;
+import model.*;
 
 import java.time.LocalDate;
 
@@ -30,6 +27,8 @@ public class JsonReader {
     public User read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
+        EventLog.getInstance().logEvent(new Event("Previously-saved user data successfully obtained "
+                + "from existing file."));
         return parseUser(jsonObject);
     }
 

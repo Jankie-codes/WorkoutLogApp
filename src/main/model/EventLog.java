@@ -1,11 +1,12 @@
-package model.eventlog;
+package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+//Code influenced by the AlarmSystem application: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
 /**
- * Represents a log of alarm system events.
+ * Represents a log of workout log events.
  * We use the Singleton Design Pattern to ensure that there is only
  * one EventLog in the system and that the system has global access
  * to the single instance of the EventLog.
@@ -16,15 +17,17 @@ public class EventLog implements Iterable<Event> {
     private Collection<Event> events;
 
     /**
-     * Prevent external construction.
+     * Private constructor to prevent external construction.
      * (Singleton Design Pattern).
      */
+    //EFFECTS: constructs a new EventLog with an empty list of events
     private EventLog() {
         events = new ArrayList<Event>();
     }
 
     /**
-     * Gets instance of EventLog - creates it
+     * MODIFIES: this
+     * EFFECTS: Gets instance of EventLog - creates it
      * if it doesn't already exist.
      * (Singleton Design Pattern)
      * @return  instance of EventLog
@@ -38,7 +41,8 @@ public class EventLog implements Iterable<Event> {
     }
 
     /**
-     * Adds an event to the event log.
+     * MODIFIES: this
+     * EFFECTS: Adds an event to the event log.
      * @param e the event to be added
      */
     public void logEvent(Event e) {
@@ -46,13 +50,15 @@ public class EventLog implements Iterable<Event> {
     }
 
     /**
-     * Clears the event log and logs the event.
+     * MODIFIES: this
+     * EFFECTS: Clears the event log and logs the event.
      */
     public void clear() {
         events.clear();
         logEvent(new Event("Event log cleared."));
     }
 
+    //EFFECTS: iterator method overridden. Returns an iterator over the elements in this.events
     @Override
     public Iterator<Event> iterator() {
         return events.iterator();

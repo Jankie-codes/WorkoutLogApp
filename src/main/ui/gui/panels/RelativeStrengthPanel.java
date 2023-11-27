@@ -72,8 +72,8 @@ public class RelativeStrengthPanel extends JPanel {
         errorText.setForeground(Color.RED);
         bodyWeightTextField = new LambdaTextField((e, input) -> {
             try {
-                if (Integer.parseInt(input) == 0) {
-                    errorText.setText("Error: bodyweight cannot be 0");
+                if (Integer.parseInt(input) <= 0) {
+                    errorText.setText("Error: bodyweight must be a positive integer");
                     return;
                 }
                 this.userToView.setBodyWeight(Integer.parseInt(input));

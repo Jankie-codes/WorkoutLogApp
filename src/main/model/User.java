@@ -50,11 +50,17 @@ public class User implements Writable {
         for (Workout workout : this.workouts) {
             if (workout.getDate().compareTo(workoutToAdd.getDate()) > 0) {
                 this.workouts.add(this.workouts.indexOf(workout), workoutToAdd);
+                EventLog.getInstance().logEvent(new Event("Added a new workout to the workout log "
+                        + "on the given date: "
+                        + workoutToAdd.getDate().toString()));
                 return;
             }
         }
         if (!(this.workouts.contains(workoutToAdd))) {
             this.workouts.add(workoutToAdd);
+            EventLog.getInstance().logEvent(new Event("Added a new workout to the workout log "
+                    + "on the given date: "
+                    + workoutToAdd.getDate().toString()));
         }
     }
 
@@ -77,6 +83,8 @@ public class User implements Writable {
                 }
             }
         }
+        EventLog.getInstance().logEvent(new Event("Treemap of PR History obtained for the given exercise: "
+                                                    + exercise.getName()));
         return personalRecords;
     }
 
@@ -102,6 +110,7 @@ public class User implements Writable {
 
     public void setBodyWeight(int bodyWeight) {
         this.bodyWeight = bodyWeight;
+        EventLog.getInstance().logEvent(new Event("User's bodyweight set to: " + this.bodyWeight));
     }
 
     //REQUIRES: multiple workouts on the same date do not exist in this.workouts.

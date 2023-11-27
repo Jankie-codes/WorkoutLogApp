@@ -117,6 +117,11 @@ public class WorkoutLogAppTUI {
         }
 
         System.out.println("\nQuitting program.");
+        System.out.println("--------------------\nEVENT LOG:\n");
+        for (model.Event event : EventLog.getInstance()) {
+            System.out.println(event.toString());
+            System.out.println("");
+        }
     }
 
     //EFFECTS: displays a prompt to the user, depending on menuState

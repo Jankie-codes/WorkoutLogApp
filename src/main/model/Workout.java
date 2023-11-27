@@ -24,6 +24,12 @@ public class Workout implements Writable {
     //EFFECTS: adds the given set into this.sets
     public void addSet(ExerciseSet set) {
         sets.add(set);
+        EventLog.getInstance().logEvent(new Event("Added a new set to a workout on the given date: "
+                + this.date.toString()
+                + "\nSet specifications: "
+                + "\n\tExercise: " + set.getExercise().getName()
+                + "\n\tWeight: " + set.getWeight()
+                + "\n\tReps: " + set.getReps()));
     }
 
     public LocalDate getDate() {

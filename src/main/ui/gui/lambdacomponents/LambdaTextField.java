@@ -14,7 +14,6 @@ public class LambdaTextField extends JTextField {
     //EFFECTS: constructs a new JTextField with the overwritten actionPerformed method defined
     // as the given lambda function parameter, actionPerformedMethod.
     public LambdaTextField(BiConsumer<ActionEvent, String> actionPerformedMethod) {
-
         super(TEXT_FIELD_LENGTH);
         addActionListener(new ActionListener() {
             @Override

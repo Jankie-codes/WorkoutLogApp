@@ -6,13 +6,15 @@ import ui.gui.panels.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.awt.event.WindowListener;
 
 import model.*;
 
 //Represents the WorkoutLogApp JFrame window which displays all components and holds User data
-public class WorkoutLogAppGUI extends JFrame {
+public class WorkoutLogAppGUI extends JFrame implements WindowListener {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 400;
     public static final int SIDE_MENU_WIDTH = 175;
@@ -32,6 +34,7 @@ public class WorkoutLogAppGUI extends JFrame {
     // and then finally paints the side menu and panels
     public WorkoutLogAppGUI() {
         super("WorkoutLogApp");
+        addWindowListener(this);
         contentPane = this.getContentPane();
         setSize(WIDTH, HEIGHT);
         setResizable(false);
@@ -210,5 +213,44 @@ public class WorkoutLogAppGUI extends JFrame {
         } catch (IOException e) {
             ((LoadedDataPanel) panels[3]).warnUnableToLoad(JSON_STORE);
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        //do nothing
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        for (model.Event event : EventLog.getInstance()) {
+            System.out.println(event.toString());
+            System.out.println("");
+        }
+        dispose();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        //do nothing
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        //do nothing
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        //do nothing
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        //do nothing
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        //do nothing
     }
 }
