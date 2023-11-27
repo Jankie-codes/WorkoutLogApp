@@ -61,7 +61,8 @@ includes a logo, text thanking the user for using the app, and loading text.
 
 # Phase 4: Task 2
 
-Representative sample event log:
+### Representative sample event log:
+
 >Sun Nov 26 16:57:04 PST 2023
 >Previously-saved user data successfully obtained from existing file.
 >
@@ -143,11 +144,13 @@ Events are logged when:
 - User data is saved and written to file
 - User data is loaded from file
 
+### **WARNING: Certain events are NOT logged. Here is why:**
+
 Events are **not** logged when the user attempts to view workout history, view 1-rep-maxes, or view relative strength. 
 This is because those three user actions involve classes within the GUI package accessing various model fields and 
 information using getter methods. Students are not allowed to log events within the UI package, and logging an 
 event every time a getter method is called would clutter the event log, so I decided to not log these three user actions
 at all. 
 
-TA Trevor Glennon approved this decision in the following Piazza post: 
+TA Trevor Glennon approved this decision and said that **I can still earn full marks** in the following Piazza post: 
 https://piazza.com/class/lly08e6z2hzwn/post/1488_f1
