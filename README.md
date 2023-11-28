@@ -144,7 +144,7 @@ Events are logged when:
 - User data is saved and written to file
 - User data is loaded from file
 
-### **WARNING: Certain events are NOT logged. Here is why:**
+### **IMPORTANT FOR GRADER: Certain events are NOT logged. Here is why:**
 
 Events are **not** logged when the user attempts to view workout history, view 1-rep-maxes, or view relative strength. 
 This is because those three user actions involve classes within the GUI package accessing various model fields and 
@@ -154,3 +154,34 @@ at all.
 
 TA Trevor Glennon approved this decision and said that **I can still earn full marks** in the following Piazza post: 
 https://piazza.com/class/lly08e6z2hzwn/post/1488_f1
+
+# Phase 4: Task 3
+
+If I had more time to refactor my project (i.e. the WorkoutLogApp), I would have used the Singleton design pattern for 
+my User class. A major problem with my GUI code was that it has one User instance which contains all the 
+user's data such as his/her bodyweight, workouts, sets, etc., but rather than using the Singleton pattern to 
+easily access this single instance globally, each one of
+my classes in the GUI package has its own User field pointing to a common memory location (i.e. the single user).
+This design still works effectively whenever the User's fields are modified, but things get problematic whenever 
+the program attempts to load data (due to reconstructing a new User).
+
+The process for loading pre-existing user data works by constructing a new User, filling in its appropriate fields
+based on an existing file, and then modifying each GUI class's user field to point to this newly-constructed User. This
+process is incredibly prone to bugs, as every time data is loaded, the program needs to modify every User field within each
+of the classes in the GUI package, and me forgetting to change even a single User field 
+(as I add more GUI classes and modify the code) would break the entire program. 
+Using the Singleton pattern would ensure that the single instance of User could
+easily be referred to globally, within any class, and that the program would no longer need a User field within each GUI class 
+pointing to the same instance (as each class could just call a getInstance method statically whenever user data is needed). 
+The app would also no longer need to modify every single User field one by one when loading data.
+
+### **IMPORTANT FOR GRADER: Including 3rd party classes in my UML Class Diagram**
+
+My UML Class Diagram includes the 3rd party classes JPanel and JButton. This is done to accurately illustrate the WorkoutLogAppGUI
+and Sidebar classes which each have a set of actual type JPanel and JButton respectively, while the sets' elements are of a more specific
+actual type (i.e. their actual type is a subclass such as AddSetPanel, LambdaButton, etc). Adding the 3rd party classes
+JPanel and JButton to my class diagram keeps this illustration clear and correct, and not including these two classes would only make
+my UML Class Diagram more vague and less accurate.
+
+TA Trevor Glennon approved my request to add JPanel and JButton to my UML Class diagram, in the following Piazza Post:
+https://piazza.com/class/lly08e6z2hzwn/post/1505
