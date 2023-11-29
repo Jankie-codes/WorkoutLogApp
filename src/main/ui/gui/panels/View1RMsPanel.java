@@ -37,7 +37,7 @@ public class View1RMsPanel extends JPanel {
         listOf1RMs.setText(getListOf1RMsString(this.userToView));
         scrollPane = new JScrollPane(listOf1RMs);
         scrollPane.setPreferredSize(new Dimension(WORKOUT_HISTORY_TEXT_BOX_WIDTH, WORKOUT_HISTORY_TEXT_BOX_HEIGHT));
-        footnote = new JLabel("*Theoretical 1RMs calculated using the Matt Brzycki equation.");
+        footnote = new JLabel("*Theoretical 1RMs calculated using the Berger equation.");
         footnote.setFont(new Font(footnote.getFont().getName(), Font.PLAIN, 10));
 
         gbc.gridx = 0;

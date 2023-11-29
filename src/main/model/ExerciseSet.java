@@ -3,6 +3,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.lang.Math;
+
 //represents an exercise set done during a workout with an exercise, total weight lifted, and total reps done.
 public class ExerciseSet implements Writable {
     Exercise exercise;
@@ -17,16 +19,25 @@ public class ExerciseSet implements Writable {
         this.reps = reps;
     }
 
+    //REQUIRES: (1.0278 - 0.0278 * this.reps) > 0
     //EFFECTS: returns the theoretical one rep max for this set using the Matt Brzycki equation:
-    // (weight / ( 1.0278 - 0.0278 * reps ))
-    public double theoreticalOneRepMax() {
+    // (weight / (1.0278 - 0.0278 * reps))
+    public double theoreticalOneRepMaxBrzycki() {
         return (((double) this.weight) / (1.0278 - 0.0278 * this.reps));
     }
 
+    //EFFECTS: returns the theoretical one rep max for this set using a modified Berger equation:
+    // (weight * (1 / (1.0261e^(-0.0262*reps)))), where -0.0262 is changed to ln(1/1.0261)
+    public double theoreticalOneRepMaxBerger() {
+        double c = 1.0261;
+        return ((double) this.weight) * (1 / (c * Math.exp((Math.log(1 / c)) * this.reps)));
+    }
+
     //REQUIRES: bodyWeight > 0
-    //EFFECTS: returns the theoretical one rep max for this set as a percentage of the given body weight
+    //EFFECTS: returns the theoretical one rep max (using the Berger equation) for this set as a percentage of
+    // the given body weight
     public double theoreticalOneRepMaxInPercentBodyWeight(int bodyWeight) {
-        return (this.theoreticalOneRepMax() / bodyWeight);
+        return (this.theoreticalOneRepMaxBerger() / bodyWeight);
     }
 
     public Exercise getExercise() {

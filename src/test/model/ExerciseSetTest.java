@@ -33,21 +33,41 @@ public class ExerciseSetTest {
     }
 
     @Test
-    public void testTheoreticalOneRepMax() {
-        assertEquals(135.0135014, set1.theoreticalOneRepMax(), 0.0000001);
-        assertEquals(138.8603168, set2.theoreticalOneRepMax(), 0.0000001);
-        assertEquals(145, set3.theoreticalOneRepMax(), 0.0000001);
+    public void testTheoreticalOneRepMaxBerger() {
+        assertEquals(133.0270611, set1.theoreticalOneRepMaxBerger(), 0.0000001);
+        assertEquals(138.5235, set2.theoreticalOneRepMaxBerger(), 0.0000001);
+        assertEquals(145, set3.theoreticalOneRepMaxBerger(), 0.0000001);
     }
 
     @Test
-    public void testTheoreticalOneRepMaxMultipleTimes() {
-        assertEquals(135.0135014, set1.theoreticalOneRepMax(), 0.0000001);
-        assertEquals(135.0135014, set1.theoreticalOneRepMax(), 0.0000001);
-        assertEquals(135.0135014, set1.theoreticalOneRepMax(), 0.0000001);
+    public void testTheoreticalOneRepMaxBergerMultipleTimes() {
+        assertEquals(133.0270611, set1.theoreticalOneRepMaxBerger(), 0.0000001);
+        assertEquals(133.0270611, set1.theoreticalOneRepMaxBerger(), 0.0000001);
+        assertEquals(133.0270611, set1.theoreticalOneRepMaxBerger(), 0.0000001);
     }
 
     @Test
-    public void testTheoreticalOneRepMaxInPercentBodyWeight() {
+    public void testTheoreticalOneRepMaxInPercentBodyWeightBrzycki() {
+        int bodyWeight1 = 135;
+        int bodyWeight2 = 145;
+
+        assertEquals(0.9174280075, set1.theoreticalOneRepMaxInPercentBodyWeight(bodyWeight2), 0.0000001);
+        assertEquals(1.0, set3.theoreticalOneRepMaxInPercentBodyWeight(bodyWeight2), 0.0000001);
+        assertEquals(1.0261, set2.theoreticalOneRepMaxInPercentBodyWeight(bodyWeight1), 0.0000001);
+    }
+
+    @Test
+    public void testTheoreticalOneRepMaxInPercentBodyWeightMultipleTimesBrzycki() {
+        int bodyWeight2 = 145;
+
+        assertEquals(0.9174280075, set1.theoreticalOneRepMaxInPercentBodyWeight(bodyWeight2), 0.0000001);
+        assertEquals(0.9174280075, set1.theoreticalOneRepMaxInPercentBodyWeight(bodyWeight2), 0.0000001);
+    }
+
+    //The following two tests assume that the Brzycki equation is used in theoreticalOneRepMaxInPercentBodyWeight method
+    /*
+    @Test
+    public void testTheoreticalOneRepMaxInPercentBodyWeightBrzycki() {
         int bodyWeight1 = 135;
         int bodyWeight2 = 145;
 
@@ -57,11 +77,25 @@ public class ExerciseSetTest {
     }
 
     @Test
-    public void testTheoreticalOneRepMaxInPercentBodyWeightMultipleTimes() {
+    public void testTheoreticalOneRepMaxInPercentBodyWeightMultipleTimesBrzycki() {
         int bodyWeight2 = 145;
 
         assertEquals(0.9311275959, set1.theoreticalOneRepMaxInPercentBodyWeight(bodyWeight2), 0.0000001);
         assertEquals(0.9311275959, set1.theoreticalOneRepMaxInPercentBodyWeight(bodyWeight2), 0.0000001);
     }
+    */
 
+    @Test
+    public void testTheoreticalOneRepMaxBrzycki() {
+        assertEquals(135.0135014, set1.theoreticalOneRepMaxBrzycki(), 0.0000001);
+        assertEquals(138.8603168, set2.theoreticalOneRepMaxBrzycki(), 0.0000001);
+        assertEquals(145, set3.theoreticalOneRepMaxBrzycki(), 0.0000001);
+    }
+
+    @Test
+    public void testTheoreticalOneRepMaxBrzyckiMultipleTimes() {
+        assertEquals(135.0135014, set1.theoreticalOneRepMaxBrzycki(), 0.0000001);
+        assertEquals(135.0135014, set1.theoreticalOneRepMaxBrzycki(), 0.0000001);
+        assertEquals(135.0135014, set1.theoreticalOneRepMaxBrzycki(), 0.0000001);
+    }
 }

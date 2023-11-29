@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.time.LocalDate;
 import java.util.TreeMap;
 
@@ -77,9 +76,9 @@ public class User implements Writable {
 
         for (int i = 0; i <= (this.workouts.size() - 1); i++) {
             for (ExerciseSet set : this.workouts.get(i).getSets()) {
-                if ((set.getExercise() == exercise) && (set.theoreticalOneRepMax() > oneRepMaxSoFar)) {
+                if ((set.getExercise() == exercise) && (set.theoreticalOneRepMaxBerger() > oneRepMaxSoFar)) {
                     personalRecords.put(this.workouts.get(i).getDate(), set);
-                    oneRepMaxSoFar = set.theoreticalOneRepMax();
+                    oneRepMaxSoFar = set.theoreticalOneRepMaxBerger();
                 }
             }
         }

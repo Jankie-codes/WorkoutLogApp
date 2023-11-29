@@ -147,7 +147,7 @@ public class PRHistoryPanel extends JPanel {
 
         for (Map.Entry<LocalDate, ExerciseSet> pr : personalRecordHistory.entrySet()) {
             prHistoryString += ("Date: " + pr.getKey() + " \nPR: "
-                + User.roundToBarbellWeight(pr.getValue().theoreticalOneRepMax())
+                + User.roundToBarbellWeight(pr.getValue().theoreticalOneRepMaxBerger())
                 + " " + WorkoutLogAppGUI.UNITS + " 1RM"
                 + " (" + pr.getValue().getWeight() + " " + WorkoutLogAppGUI.UNITS + " "
                     + pr.getValue().getReps() + " reps)" + "\n\n");

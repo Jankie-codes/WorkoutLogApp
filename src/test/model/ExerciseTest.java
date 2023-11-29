@@ -75,9 +75,9 @@ class ExerciseTest {
 
     @Test
     public void testSetNewPRIfNecessary() {
-        double max1 = set1.theoreticalOneRepMax();
-        double max2 = set2.theoreticalOneRepMax();
-        double max3 = set3.theoreticalOneRepMax();
+        double max1 = set1.theoreticalOneRepMaxBerger();
+        double max2 = set2.theoreticalOneRepMaxBerger();
+        double max3 = set3.theoreticalOneRepMaxBerger();
         benchPress.setOneRepMax(max2);
         benchPress.setNewPRIfNecessary(set1);
         assertEquals(max2, benchPress.getOneRepMax());

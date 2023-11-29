@@ -38,8 +38,8 @@ public class Exercise implements Writable {
     //EFFECTS: if the given ExerciseSet has a greater theoretical one rep max than the current one rep max,
     // then update this.oneRepMax to the given ExerciseSet's theoretical max
     public void setNewPRIfNecessary(ExerciseSet set) {
-        if (set.theoreticalOneRepMax() > this.oneRepMax) {
-            this.oneRepMax = set.theoreticalOneRepMax();
+        if (set.theoreticalOneRepMaxBerger() > this.oneRepMax) {
+            this.oneRepMax = set.theoreticalOneRepMaxBerger();
         }
     }
 

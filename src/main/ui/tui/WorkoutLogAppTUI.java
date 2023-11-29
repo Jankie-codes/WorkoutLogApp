@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.TreeMap;
@@ -316,7 +315,7 @@ public class WorkoutLogAppTUI {
         TreeMap<LocalDate, ExerciseSet> personalRecordHistory = user.listPRs(exercise);
         System.out.println(exercise.getName() + " PR History:\n");
         personalRecordHistory.forEach((k,v) -> System.out.println("Date: " + k + " PR: "
-                + User.roundToBarbellWeight(v.theoreticalOneRepMax())
+                + User.roundToBarbellWeight(v.theoreticalOneRepMaxBerger())
                 + " " + UNITS + " 1RM"
                 + " (" + v.getWeight() + " " + UNITS + " " + v.getReps() + " reps)" + "\n"));
     }
