@@ -45,13 +45,13 @@ public class Sidebar extends JPanel {
             controller.setPanelVisible(1);
         });
 
-        buttons[2] = new LambdaButton("View 1RMs", e -> {
+        buttons[2] = new LambdaButton("One rep maxes", e -> {
             controller.hideAllPanels();
             controller.refreshView1RMsPanel();
             controller.setPanelVisible(4);
         });
 
-        buttons[3] = new LambdaButton("View PR history", e -> {
+        buttons[3] = new LambdaButton("PR history", e -> {
             controller.hideAllPanels();
             controller.refreshPRHistoryPanel();
             controller.setPanelVisible(5);

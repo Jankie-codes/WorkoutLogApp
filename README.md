@@ -1,17 +1,29 @@
-# My Personal Project: *Workout and Progress Log*
+# CPSC 210: My Personal Project: *Workout and Progress Log*
+
+## Note to users (Jan 25, 2024)
+Hi there! Thanks for checking out my WorkoutLogApp. 
+I made this program as my project for my CPSC 210 course during my studies at UBC. 
+I created a text-based user interface using the Java Scanner library, and then a graphical user interface using 
+Java Swing.
+Please read below to learn about its features!
+
+
+***
 
 ## Basic Application Purpose and Functions
+Last updated: January 25, 2024
 
-This application will be designed to **track weightlifters' strength and progress over time**. After a workout, users 
-will be able to record their completed exercises (e.g. squat, bench press), number of repetitions done, as well as any 
+This application was designed to **track weightlifters' strength and progress over time**. After a workout, users 
+are able to record their completed exercises (e.g. squat, bench press), number of repetitions done, as well as any 
 additional notes (e.g. comments on lifting technique) they would like to add. 
 
-Using this data, the application will be able to:
+Using these data, the application is able to:
 - Show past workout history
 - Calculate one-rep maxes* for any given lift
+- Show strength record histories (PR histories) for any given exercise
 - Determine whether the user is strong for their body weight at any particular lift
 
-(Not an exhaustive list of features)
+The app can also save and load data.
 
 As previously mentioned, this application is designed for and will mostly be used by **weightlifters** and **those 
 trying to improve physical strength in the gym**.
@@ -20,6 +32,8 @@ trying to improve physical strength in the gym**.
 (e.g. squat, deadlift, bench press).
 
 ## Interests in This Project
+
+Last updated: September 28, 2023
 
 Tracking workouts is essential to ensuring progress in the gym and becoming a successful lifter. As a weightlifter for 
 one year now, I have been logging all my workouts in a single Apple notes file on my phone. However, as I added
@@ -31,6 +45,8 @@ longer have to rely on Apple Notes to do so.
 
 ## User Stories
 
+Last updated: October 27, 2023
+
 - As a user, I want to be able to log/add an exercise set and specify the type of movement, total weight, 
 total repetitions, and date.
 - As a user, I want to be able to view a full workout history.
@@ -41,6 +57,8 @@ total repetitions, and date.
 - As a user, I want to be able to load my previous workout data from file (if I so choose).
 
 # Instructions for Grader
+
+Last updated: November 16, 2023
 
 - You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking the 
 "Add set" button on the sidebar on the left, filling in information for the exercise, weight, reps, and date, then
@@ -60,6 +78,13 @@ includes a logo, text thanking the user for using the app, and loading text.
 - You can reload the state of my application by clicking the "load workout log" button on the sidebar on the left.
 
 # Phase 4: Task 2
+
+Last updated: January 25, 2024
+
+When the WorkoutLogApp closes, it also prints an event 
+log to the console of all actions performed by the user.
+An example event log is shown below.
+
 
 ### Representative sample event log:
 
@@ -156,6 +181,8 @@ TA Trevor Glennon approved this decision and said that **I can still earn full m
 https://piazza.com/class/lly08e6z2hzwn/post/1488_f1
 
 # Phase 4: Task 3
+
+Last updated: November 28, 2023
 
 If I had more time to refactor my project (i.e. the WorkoutLogApp), I would have used the Singleton design pattern for 
 my User class. A major problem with my GUI code was that it has one User instance which contains all the 
