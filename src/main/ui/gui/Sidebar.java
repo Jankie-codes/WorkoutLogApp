@@ -39,7 +39,7 @@ public class Sidebar extends JPanel {
             controller.setPanelVisible(0);
         });
 
-        buttons[1] = new LambdaButton("View workout history", e -> {
+        buttons[1] = new LambdaButton("Workout history", e -> {
             controller.hideAllPanels();
             controller.refreshViewHistoryPanel();
             controller.setPanelVisible(1);
@@ -57,7 +57,7 @@ public class Sidebar extends JPanel {
             controller.setPanelVisible(5);
         });
 
-        buttons[4] = new LambdaButton("View relative strength", e -> {
+        buttons[4] = new LambdaButton("Relative strength", e -> {
             controller.hideAllPanels();
             controller.refreshRelativeStrengthPanel();
             controller.setPanelVisible(6);
